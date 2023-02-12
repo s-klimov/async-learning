@@ -1,0 +1,2 @@
+TIC_TIMEOUT = 0.1
+STARS = "+*.:"
