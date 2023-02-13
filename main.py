@@ -4,20 +4,32 @@ import random
 
 import itertools
 
-from animations.stars import blink, get_stars
+from typing import NamedTuple
+
+from animations.stars import blink
+from animations.figures import get_stars, load_figure
 from animations.fire import fire
 from animations.ship import animate_spaceship
 from curses_tools import get_frame_size, read_controls
 
 from constants import TIC_TIMEOUT
 
+class Border(NamedTuple):
+    upper: int
+    left: int
+    lower: int
+    right: int
+
 
 def draw(canvas):
     canvas.border()
-    rows, columns = canvas.getmaxyx()  
+    rows, columns = canvas.getmaxyx()
+    border = Border(1, 1, rows-2, columns-2)
 
-    coroutines = [blink(canvas, row, column, symbol, delay_periods) for row, column, symbol, delay_periods in get_stars(rows, columns)]
+    coroutines = [blink(canvas, row, column, symbol, delay_periods) for row, column, symbol, delay_periods in get_stars("stars.txt", border)]
     
+    ship = load_figure("rocket_frame_1.txt", "rocket_frame_2.txt")
+
     with open('frames/rocket_frame_1.txt') as fh1, open('frames/rocket_frame_2.txt') as fh2:
         frame1 = fh1.read()
         frame2 = fh2.read()
