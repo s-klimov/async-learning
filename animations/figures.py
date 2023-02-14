@@ -28,6 +28,13 @@ class Figure:
         return self.__width
 
 
+def get_start_position(figure, border):
+    return (
+        int((border.lower - figure.height) / 2) + border.upper,
+        int((border.right - figure.width) / 2) + border.left,
+    )
+
+
 def load_figure(*paths):
     """
     Загрузка фигуры из файлов
@@ -38,7 +45,7 @@ def load_figure(*paths):
     for path in paths:
         with open(os.path.join(FRAMES_FOLDER, path)) as file:
             frames.append(file.read())
-    
+
     return Figure(frames)
 
 
@@ -51,9 +58,8 @@ def get_stars(path: str, border, count=50):
         stars = file.read()
 
     for _ in range(count):
-        pos_y = random.randint(border.upper, border.lower)
-        pos_x = random.randint(border.left, border.right)
+        pos_y = random.randint(border.upper, border.lower - 1)
+        pos_x = random.randint(border.left, border.right - 1)
         symbol = random.choice(stars)
         delay_periods = random.randint(1, 5)
         yield pos_y, pos_x, symbol, delay_periods
-    
