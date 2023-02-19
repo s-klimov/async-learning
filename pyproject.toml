@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "game"
+version = "0.1.0"
+description = "Учебный репозиторий по асинхронному программированию"
+authors = ["Sergei Kilmov <s.klimov@bk.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+numpy = "^1.24.2"
+
+[tool.poetry.dev-dependencies]
+flake8 = "^6.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
