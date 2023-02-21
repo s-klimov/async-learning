@@ -15,9 +15,7 @@ async def animate_spaceship(canvas, border, row, column, ship):
         row = min(border.lower - ship.height, max(row, border.upper))
         column = min(border.right - ship.width, max(column, border.left))
 
-        frames = (x for item in ship.frames for x in repeat(item, FREQUENCY))
-
-        for frame in frames:
+        for frame in ship.frames:
             draw_frame(canvas, row, column, frame)
             await asyncio.sleep(0)
             draw_frame(canvas, row, column, frame, negative=True)

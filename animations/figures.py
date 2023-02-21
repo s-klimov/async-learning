@@ -1,7 +1,9 @@
+import itertools
 import os
 import random
 
 import curses_tools
+from constants import FREQUENCY
 
 FRAMES_FOLDER = "frames"
 
@@ -13,7 +15,8 @@ class Figure:
 
     def __init__(self, frames):
         self.__height, self.__width = curses_tools.get_frame_size(frames[0])
-        self.__frames = frames
+        self.__frames = [x for item in frames for x in itertools.repeat(item, FREQUENCY)]
+        self.__iterator = itertools.cycle(self.__frames)
 
     @property
     def frames(self):
@@ -26,6 +29,10 @@ class Figure:
     @property
     def width(self) -> int:
         return self.__width
+
+    def __next__(self):
+        return next(self.__iterator)
+
 
 
 def get_start_position(figure, border):

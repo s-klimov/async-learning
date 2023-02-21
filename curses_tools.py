@@ -1,3 +1,5 @@
+from constants import FRAME_THICKNESS
+
 SPACE_KEY_CODE = 32
 LEFT_KEY_CODE = 260
 RIGHT_KEY_CODE = 261
@@ -40,16 +42,17 @@ def draw_frame(canvas, start_row, start_column, text, negative=False):
     """Draw multiline text fragment on canvas, erase text instead of drawing if negative=True is specified."""
 
     rows_number, columns_number = canvas.getmaxyx()
+    rows_number, columns_number = rows_number - FRAME_THICKNESS, columns_number - FRAME_THICKNESS
 
     for row, line in enumerate(text.splitlines(), round(start_row)):
-        if row < 0:
+        if row < FRAME_THICKNESS:
             continue
 
         if row >= rows_number:
             break
 
         for column, symbol in enumerate(line, round(start_column)):
-            if column < 0:
+            if column < FRAME_THICKNESS:
                 continue
 
             if column >= columns_number:
