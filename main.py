@@ -6,9 +6,9 @@ from typing import NamedTuple
 from animations.blink import blink
 from animations.figures import get_stars, load_figure, get_start_position
 from animations.ship import animate_spaceship
-from animations.space_garbage import fly_garbage
+from animations.space_garbage import fill_orbit_with_garbage
 
-from constants import TIC_TIMEOUT, FRAME_THICKNESS
+from constants import TIC_TIMEOUT, FRAME_THICKNESS, coroutines
 
 
 class Border(NamedTuple):
@@ -24,10 +24,10 @@ def draw(canvas):
     rows, columns = canvas.getmaxyx()
     border = Border(FRAME_THICKNESS, FRAME_THICKNESS, rows - FRAME_THICKNESS, columns - FRAME_THICKNESS)
 
-    coroutines = [
+    coroutines.extend([
         blink(canvas, row, column, symbol, delay_periods)
         for row, column, symbol, delay_periods in get_stars("stars.txt", border)
-    ]
+    ])
 
     ship = load_figure("rocket_frame_1.txt", "rocket_frame_2.txt")
 
@@ -36,15 +36,16 @@ def draw(canvas):
 
     coroutines.append(ship_coro)
 
-    #
-    garbage_duck = load_figure("duck.txt")
-    garbage_hubble = load_figure("hubble.txt")
-    garbage_lamp = load_figure("lamp.txt")
-    coroutines.extend([
-    fly_garbage(canvas, border, column=10, garbage=garbage_duck),
-    fly_garbage(canvas, border, column=20, garbage=garbage_hubble),
-    fly_garbage(canvas, border, column=80, garbage=garbage_lamp),
-    ])
+    garbages = [
+        load_figure("duck.txt"),
+        load_figure("hubble.txt"),
+        load_figure("lamp.txt"),
+        load_figure("trash_large.txt"),
+        load_figure("trash_small.txt"),
+        load_figure("trash_xl.txt"),
+    ]
+
+    coroutines.append(fill_orbit_with_garbage(canvas, border, garbages))
 
     while True:
         for coroutine in coroutines.copy():

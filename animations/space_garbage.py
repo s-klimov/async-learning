@@ -1,9 +1,14 @@
+import random
+
+from constants import FREQUENCY, DIFFICULTY
 from curses_tools import draw_frame
 import asyncio
 
+from constants import coroutines
+
+
 async def fly_garbage(canvas, border, column, garbage, speed=0.5):
     """Animate garbage, flying from top to bottom. Сolumn position will stay same, as specified on start."""
-    rows_number, columns_number = canvas.getmaxyx()
 
     column = max(column, border.left)
     column = min(column, border.right)
@@ -15,3 +20,13 @@ async def fly_garbage(canvas, border, column, garbage, speed=0.5):
         await asyncio.sleep(0)
         draw_frame(canvas, row, column, next(garbage), negative=True)
         row += speed
+
+
+async def fill_orbit_with_garbage(canvas, border, garbages):
+
+    while True:
+        coroutines.append(fly_garbage(
+                canvas, border, column=random.randint(border.left, border.right), garbage=random.choice(garbages)
+        ))
+        for _ in range(FREQUENCY*DIFFICULTY):
+            await asyncio.sleep(0)
