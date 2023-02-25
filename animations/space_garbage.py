@@ -1,5 +1,6 @@
 import random
 
+from animations.explosion import explode
 from animations.obstacles import Obstacle, show_obstacles
 from constants import FREQUENCY, DIFFICULTY, obstacles, obstacles_in_last_collisions
 from curses_tools import draw_frame
@@ -27,6 +28,7 @@ async def fly_garbage(canvas, border, column, garbage, speed=0.5):
         destroyed = obstacle in obstacles_in_last_collisions
         obstacles.remove(obstacle)
         if destroyed:
+            coroutines.append(explode(canvas, row+garbage.height/2, column+garbage.width/2))
             obstacles_in_last_collisions.remove(obstacle)
             break
 
