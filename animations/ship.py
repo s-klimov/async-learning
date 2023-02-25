@@ -37,6 +37,6 @@ async def animate_spaceship(canvas, border, row, column, ship):
             # Прорисовку выстрела вставляем между кадрами анимации корабля
             if space_pressed:
                 coroutines.append(
-                    fire(canvas, row, column + ship.width / 2)
+                    fire(canvas, border, row, column + ship.width / 2)
                 )
                 space_pressed = False

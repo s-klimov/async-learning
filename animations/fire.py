@@ -1,10 +1,8 @@
 import asyncio
 import curses
 
-from constants import FRAME_THICKNESS
 
-
-async def fire(canvas, start_row, start_column, rows_speed=-0.3, columns_speed=0):
+async def fire(canvas, border, start_row, start_column, rows_speed=-0.3, columns_speed=0):
     """Display animation of gun shot, direction and speed can be specified."""
 
     row, column = start_row, start_column
@@ -26,7 +24,7 @@ async def fire(canvas, start_row, start_column, rows_speed=-0.3, columns_speed=0
 
     curses.beep()
 
-    while FRAME_THICKNESS < row < max_row and FRAME_THICKNESS < column < max_column:
+    while border.upper < row < max_row and border.left < column < max_column:
         canvas.addstr(round(row), round(column), symbol)
         await asyncio.sleep(0)
         canvas.addstr(round(row), round(column), " ")

@@ -14,9 +14,17 @@ class Figure:
     """
 
     def __init__(self, frames):
+        """
+        Конструктор класса.
+        Создает атрибуты высоты и ширины фигуры __height, __width
+        __frames - каждый кадр анимации дублируется в зависимости от параметра FREQUENCY проекта
+        __cycle - бесконечный генератор по списку __frames
+
+        @param frames: кадры анимации фигуры
+        """
         self.__height, self.__width = curses_tools.get_frame_size(frames[0])
         self.__frames = [x for item in frames for x in itertools.repeat(item, FREQUENCY)]
-        self.__iterator = itertools.cycle(self.__frames)
+        self.__cycle = itertools.cycle(self.__frames)
 
     @property
     def frames(self):
@@ -31,7 +39,7 @@ class Figure:
         return self.__width
 
     def __next__(self):
-        return next(self.__iterator)
+        return next(self.__cycle)
 
 
 

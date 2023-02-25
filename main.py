@@ -8,7 +8,7 @@ from animations.figures import get_stars, load_figure, get_start_position
 from animations.ship import animate_spaceship
 from animations.space_garbage import fill_orbit_with_garbage
 
-from constants import TIC_TIMEOUT, FRAME_THICKNESS, coroutines
+from constants import TIC_TIMEOUT, FRAME_THICKNESS, coroutines, loop
 
 
 class Border(NamedTuple):
