@@ -2,6 +2,10 @@ import asyncio
 from curses_tools import draw_frame
 
 
+OBSTACLE_HOR = " "
+OBSTACLE_VERT = " "
+
+
 class Obstacle:
 
     def __init__(self, row, column, rows_size=1, columns_size=1, uid=None):
@@ -34,10 +38,10 @@ class Obstacle:
 
 
 def _get_bounding_box_lines(rows, columns):
-    yield ' ' + '-' * columns + ' '
+    yield ' ' + OBSTACLE_HOR * columns + ' '
     for _ in range(rows):
-        yield '|' + ' ' * columns + '|'
-    yield ' ' + '-' * columns + ' '
+        yield OBSTACLE_VERT + ' ' * columns + OBSTACLE_VERT
+    yield ' ' + OBSTACLE_HOR * columns + ' '
 
 
 async def show_obstacles(canvas, obstacles):
