@@ -1,7 +1,7 @@
 import random
 
 from animations.obstacles import Obstacle, show_obstacles
-from constants import FREQUENCY, DIFFICULTY, obstacles, loop
+from constants import FREQUENCY, DIFFICULTY, obstacles, obstacles_in_last_collisions
 from curses_tools import draw_frame
 import asyncio
 
@@ -23,7 +23,12 @@ async def fly_garbage(canvas, border, column, garbage, speed=0.5):
         obstacles.append(obstacle)
         await asyncio.sleep(0)
         draw_frame(canvas, row, column, next(garbage), negative=True)
+
+        destroyed = obstacle in obstacles_in_last_collisions
         obstacles.remove(obstacle)
+        if destroyed:
+            obstacles_in_last_collisions.remove(obstacle)
+            break
 
         row += speed
 
