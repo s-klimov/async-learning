@@ -13,8 +13,6 @@ async def show_gameover(canvas, border):
 
     while True:
 
-        for frame in game_over.frames:
-            draw_frame(canvas, row, column, frame)
-            await asyncio.sleep(0)
-            draw_frame(canvas, row, column, frame, negative=True)
+        draw_frame(canvas, row, column, next(game_over))
+        await asyncio.sleep(0)
 
