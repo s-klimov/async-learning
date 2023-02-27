@@ -42,7 +42,6 @@ class Figure:
         return next(self.__cycle)
 
 
-
 def get_start_position(figure, border):
     return (
         int((border.lower - figure.height) / 2) + border.upper,

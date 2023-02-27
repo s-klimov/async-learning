@@ -5,7 +5,7 @@ import constants
 from animations.explosion import explode
 from animations.game_scenario import get_garbage_delay_tics, show_year
 from animations.obstacles import Obstacle, show_obstacles
-from constants import FREQUENCY, DIFFICULTY, obstacles, obstacles_in_last_collisions, TIC_TIMEOUT
+from constants import obstacles, obstacles_in_last_collisions
 from curses_tools import draw_frame
 import asyncio
 

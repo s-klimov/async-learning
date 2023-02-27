@@ -14,6 +14,7 @@ PHRASES = {
     2020: "Take the plasma gun! Shoot the garbage!",
 }
 
+
 def get_garbage_delay_tics(year):
     if year < 1961:
         return None
@@ -29,6 +30,7 @@ def get_garbage_delay_tics(year):
         return 6
     else:
         return 2
+
 
 async def show_year(canvas, border):
     """Display YEAR value"""
