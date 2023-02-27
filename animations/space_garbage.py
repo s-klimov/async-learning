@@ -20,19 +20,19 @@ async def fly_garbage(canvas, border, column, garbage, speed=0.5):
     row = border.upper
 
     while row < border.lower:
-        obstacle = Obstacle(row, column, garbage.height, garbage.width, uid='мусор')
+        # obstacle = Obstacle(row, column, garbage.height, garbage.width, uid='мусор')
 
         draw_frame(canvas, row, column, next(garbage))
-        obstacles.append(obstacle)
+        # obstacles.append(obstacle)
         await asyncio.sleep(0)
         draw_frame(canvas, row, column, next(garbage), negative=True)
 
-        destroyed = obstacle in obstacles_in_last_collisions
-        obstacles.remove(obstacle)
-        if destroyed:
-            coroutines.append(explode(canvas, row+garbage.height/2, column+garbage.width/2))
-            obstacles_in_last_collisions.remove(obstacle)
-            break
+        # destroyed = obstacle in obstacles_in_last_collisions
+        # obstacles.remove(obstacle)
+        # if destroyed:
+        #     coroutines.append(explode(canvas, row+garbage.height/2, column+garbage.width/2))
+        #     obstacles_in_last_collisions.remove(obstacle)
+        #     break
 
         row += speed
 
