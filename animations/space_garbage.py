@@ -1,15 +1,14 @@
 import random
 
-import constants
+import global_vars
 
 from animations.explosion import explode
 from animations.game_scenario import get_garbage_delay_tics, show_year
 from animations.obstacles import Obstacle, show_obstacles
-from constants import obstacles, obstacles_in_last_collisions
 from curses_tools import draw_frame
 import asyncio
 
-from constants import coroutines
+from global_vars import coroutines, obstacles, obstacles_in_last_collisions
 
 
 async def fly_garbage(canvas, border, column, garbage, speed=0.5):
@@ -44,7 +43,7 @@ async def fill_orbit_with_garbage(canvas, border, garbages):
 
         coroutines.append(show_year(canvas, border))
 
-        if get_garbage_delay_tics(constants.year) is None:
+        if get_garbage_delay_tics(global_vars.year) is None:
             await asyncio.sleep(0)
             continue
 
@@ -55,5 +54,5 @@ async def fill_orbit_with_garbage(canvas, border, garbages):
                 canvas, obstacles
         ))
 
-        for _ in range(get_garbage_delay_tics(constants.year)):
+        for _ in range(get_garbage_delay_tics(global_vars.year)):
             await asyncio.sleep(0)

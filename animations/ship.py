@@ -5,7 +5,7 @@ from animations.fire import fire
 from animations.gameover import show_gameover
 from animations.obstacles import has_collision
 from animations.physics import update_speed
-from constants import coroutines, obstacles
+from global_vars import coroutines, obstacles
 from curses_tools import draw_frame, read_controls
 
 

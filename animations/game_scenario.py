@@ -1,6 +1,6 @@
 import asyncio
 
-import constants
+import global_vars
 
 PHRASES = {
     # Только на английском, Repl.it ломается на кириллице
@@ -35,7 +35,7 @@ def get_garbage_delay_tics(year):
 async def show_year(canvas, border):
     """Display YEAR value"""
 
-    year = str(constants.year)
+    year = str(global_vars.year)
     row = border.lower - 1
     column = border.right - len(year) - 1
 

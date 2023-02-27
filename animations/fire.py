@@ -2,7 +2,7 @@ import asyncio
 import curses
 
 from animations.obstacles import has_collision
-from constants import obstacles, obstacles_in_last_collisions
+from global_vars import obstacles, obstacles_in_last_collisions
 
 
 async def fire(canvas, border, start_row, start_column, rows_speed=-0.3, columns_speed=0):

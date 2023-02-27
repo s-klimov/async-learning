@@ -1,6 +1,7 @@
 import itertools
 import os
 import random
+from typing import NamedTuple
 
 import curses_tools
 from constants import FREQUENCY
@@ -77,3 +78,10 @@ def get_stars(path: str, border, count=50):
         symbol = random.choice(stars)
         delay_periods = random.randint(1, 5)
         yield pos_y, pos_x, symbol, delay_periods
+
+
+class Border(NamedTuple):
+    upper: int
+    left: int
+    lower: int
+    right: int
