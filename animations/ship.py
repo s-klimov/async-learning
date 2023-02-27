@@ -5,7 +5,8 @@ from animations.fire import fire
 from animations.gameover import show_gameover
 from animations.obstacles import has_collision
 from animations.physics import update_speed
-from global_vars import coroutines, obstacles
+from constants import AVAILABLE_FIRE_SINCE
+from global_vars import coroutines, obstacles, year
 from curses_tools import draw_frame, read_controls
 
 
@@ -27,6 +28,9 @@ async def animate_spaceship(canvas, border, row, column, ship):
     while True:
         rows_direction, columns_direction, space_pressed = read_controls(canvas)
         row_speed, column_speed = update_speed(row_speed, column_speed, rows_direction, columns_direction, 3, 3)
+
+        if year <= AVAILABLE_FIRE_SINCE:
+            space_pressed = False
 
         row += row_speed
         column += column_speed
