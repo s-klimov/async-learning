@@ -39,13 +39,9 @@ async def fly_garbage(canvas, border, column, garbage, speed=0.5):
 
 
 async def fill_orbit_with_garbage(canvas, border, garbages):
-    counter = 0.0
 
     while True:
-        counter += TIC_TIMEOUT
-        if counter >= 1.5:
-            constants.year += 1
-            counter = 0
+
         coroutines.append(show_year(canvas, border))
 
         if get_garbage_delay_tics(constants.year) is None:

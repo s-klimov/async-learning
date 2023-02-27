@@ -3,6 +3,7 @@ import curses
 
 from typing import NamedTuple
 
+import constants
 from animations.blink import blink
 from animations.figures import get_stars, load_figure, get_start_position
 from animations.ship import animate_spaceship
@@ -47,7 +48,15 @@ def draw(canvas):
 
     coroutines.append(fill_orbit_with_garbage(canvas, border, garbages))
 
+    year_timer = 0.0
+
     while True:
+
+        year_timer += TIC_TIMEOUT
+        if year_timer >= 1.5:
+            constants.year += 1
+            year_timer = 0
+
         for coroutine in coroutines.copy():
             try:
                 coroutine.send(None)
