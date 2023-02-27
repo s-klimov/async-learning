@@ -1,7 +1,10 @@
+import itertools
 import os
 import random
+from typing import NamedTuple
 
 import curses_tools
+from constants import FREQUENCY
 
 FRAMES_FOLDER = "frames"
 
@@ -12,8 +15,17 @@ class Figure:
     """
 
     def __init__(self, frames):
+        """
+        Конструктор класса.
+        Создает атрибуты высоты и ширины фигуры __height, __width
+        __frames - каждый кадр анимации дублируется в зависимости от параметра FREQUENCY проекта
+        __cycle - бесконечный генератор по списку __frames
+
+        @param frames: кадры анимации фигуры
+        """
         self.__height, self.__width = curses_tools.get_frame_size(frames[0])
-        self.__frames = frames
+        self.__frames = [x for item in frames for x in itertools.repeat(item, FREQUENCY)]
+        self.__cycle = itertools.cycle(self.__frames)
 
     @property
     def frames(self):
@@ -26,6 +38,9 @@ class Figure:
     @property
     def width(self) -> int:
         return self.__width
+
+    def __next__(self):
+        return next(self.__cycle)
 
 
 def get_start_position(figure, border):
@@ -63,3 +78,10 @@ def get_stars(path: str, border, count=50):
         symbol = random.choice(stars)
         delay_periods = random.randint(1, 5)
         yield pos_y, pos_x, symbol, delay_periods
+
+
+class Border(NamedTuple):
+    upper: int
+    left: int
+    lower: int
+    right: int
