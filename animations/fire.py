@@ -1,12 +1,23 @@
 import asyncio
 import curses
 
+from animations.figures import Border
 from animations.obstacles import has_collision
 from global_vars import obstacles, obstacles_in_last_collisions
 
 
-async def fire(canvas, border, start_row, start_column, rows_speed=-0.3, columns_speed=0):
-    """Display animation of gun shot, direction and speed can be specified."""
+async def fire(canvas, border: Border, start_row: int, start_column: int, rows_speed: float = -0.3, columns_speed: float = 0.0):
+    """
+    Display animation of gun shot, direction and speed can be specified.
+
+    Ключевые аргументы:
+    canvas -- объект игрового поля
+    border -- границы игрового поля
+    start_row -- начальная горизонтальная координата выстрела
+    start_column -- начальная вертикальная координата выстрела
+    rows_speed -- вертикальная скорость движения выстрела
+    columns_speed -- горизонтальная скорость движения выстрела
+    """
 
     row, column = start_row, start_column
 

@@ -7,6 +7,7 @@ OBSTACLE_VERT = " "
 
 
 class Obstacle:
+    """Класс границ игрового поля. Нужен для определения касания фигуры мусора с кораблем или выстрелом."""
 
     def __init__(self, row, column, rows_size=1, columns_size=1, uid=None):
         self.row = row

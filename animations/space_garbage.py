@@ -3,6 +3,7 @@ import random
 import global_vars
 
 from animations.explosion import explode
+from animations.figures import Border, Figure
 from animations.game_scenario import get_garbage_delay_tics, show_year
 from animations.obstacles import Obstacle, show_obstacles
 from curses_tools import draw_frame
@@ -11,9 +12,17 @@ import asyncio
 from global_vars import coroutines, obstacles, obstacles_in_last_collisions
 
 
-async def fly_garbage(canvas, border, column, garbage, speed=0.5):
-    """Animate garbage, flying from top to bottom. Сolumn position will stay same, as specified on start."""
+async def fly_garbage(canvas, border: Border, column: int, garbage: Figure, speed=0.5):
+    """
+    Animate garbage, flying from top to bottom. Сolumn position will stay same, as specified on start.
 
+    Ключевые аргументы:
+    canvas -- объект игрового поля
+    border -- границы игрового поля
+    column -- горизонтальная координата начала движения мусора вниз
+    garbage -- фигура мусора
+    speed -- скорость движения мусора
+    """
     column = max(column, border.left)
     column = min(column, border.right)
 
@@ -37,7 +46,15 @@ async def fly_garbage(canvas, border, column, garbage, speed=0.5):
         row += speed
 
 
-async def fill_orbit_with_garbage(canvas, border, garbages):
+async def fill_orbit_with_garbage(canvas, border: Border, garbages: list):
+    """
+    Заполняет игровое поле мусором.
+
+    Ключевые аргументы:
+    canvas -- объект игрового поля
+    border -- границы игрового поля
+    garbages -- список фигур мусора
+    """
 
     while True:
 

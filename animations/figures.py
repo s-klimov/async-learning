@@ -68,9 +68,12 @@ def get_start_position(figure: Figure, border: Border) -> (int, int):
     )
 
 
-def load_figure(*paths):
+def load_figure(*paths) -> Figure:
     """
-    Загрузка фигуры из файлов
+    Формирует фигуру из фреймов, расположенных в текстовых файлах
+
+    Ключевые аргументы:
+    paths -- список путей до текстовых файлов с фреймами
     """
 
     frames = list()
@@ -90,9 +93,14 @@ def load_garbages() -> list:
             if isfile(join_path(FRAMES_FOLDER, GARBAGE_SUBFOLDER, f)) and f.endswith(".txt")]
 
 
-def get_stars(path: str, border, count=50):
+def get_stars(path: str, border: Border, count: int = 50):
     """
     Формирование списка звёзд
+
+    Ключевые аргументы:
+    path -- путь до текстового файла, содержащего символы звёзд
+    border -- границы игрового поля
+    count -- количество звезд на игровом поле
     """
 
     with open(join_path(FRAMES_FOLDER, path)) as file:

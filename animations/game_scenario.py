@@ -1,6 +1,7 @@
 import asyncio
 
 import global_vars
+from animations.figures import Border
 
 PHRASES = {
     # Только на английском, Repl.it ломается на кириллице
@@ -15,7 +16,15 @@ PHRASES = {
 }
 
 
-def get_garbage_delay_tics(year):
+def get_garbage_delay_tics(year: int):
+    """
+    В зависимости от года, уменьшает интервалы между появлением нового мусора.
+    Чем дальше в будущее, тем быстрее появляется новый мусор
+
+    Ключевые аргументы:
+    year -- год
+    """
+
     if year < 1961:
         return None
     elif year < 1969:
@@ -32,8 +41,14 @@ def get_garbage_delay_tics(year):
         return 2
 
 
-async def show_year(canvas, border):
-    """Display YEAR value"""
+async def show_year(canvas, border: Border):
+    """
+    Display YEAR value
+
+    Ключевые аргументы:
+    canvas -- объект игрового поля
+    border -- границы игрового поля
+    """
 
     year = str(global_vars.year)
     row = border.lower - 1
