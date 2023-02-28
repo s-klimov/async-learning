@@ -6,7 +6,7 @@ from animations.obstacles import has_collision
 from global_vars import obstacles, obstacles_in_last_collisions
 
 
-async def fire(canvas, border: Border, start_row: float, start_column: float, rows_speed: float = -0.3, columns_speed: float = 0.0):
+async def fire(canvas, border: Border, start_row: int, start_column: int, rows_speed: float = -0.3, columns_speed: float = 0.0):
     """
     Display animation of gun shot, direction and speed can be specified.
 
