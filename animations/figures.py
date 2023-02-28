@@ -54,7 +54,7 @@ class Border(NamedTuple):
     right: int
 
 
-def get_start_position(figure: Figure, border: Border) -> (int, int):
+def get_start_position(figure: Figure, border: Border) -> tuple[int, int]:
     """
     Функция расчета левых верхних координат для размещения фигуры в центре поля
 
