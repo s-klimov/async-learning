@@ -2,7 +2,7 @@ import time
 
 import global_vars
 from animations.blink import blink
-from animations.figures import Border, get_stars, load_figure, get_start_position
+from animations.figures import Border, get_stars, load_figure, get_start_position, load_garbages
 from animations.ship import animate_spaceship
 from animations.space_garbage import fill_orbit_with_garbage
 from constants import FRAME_THICKNESS, TIC_TIMEOUT
@@ -10,6 +10,12 @@ from global_vars import coroutines
 
 
 def draw(canvas):
+    """
+    Основная функция проекта, которая генерирует корутины и запускает цикл событий
+
+    Ключевые аргументы:
+    canvas -- объект рабочего поля
+    """
     canvas.nodelay(True)
     canvas.border()
     rows, columns = canvas.getmaxyx()
@@ -27,14 +33,7 @@ def draw(canvas):
 
     coroutines.append(ship_coro)
 
-    garbages = [
-        load_figure("duck.txt"),
-        load_figure("hubble.txt"),
-        load_figure("lamp.txt"),
-        load_figure("trash_large.txt"),
-        load_figure("trash_small.txt"),
-        load_figure("trash_xl.txt"),
-    ]
+    garbages = load_garbages()
 
     coroutines.append(fill_orbit_with_garbage(canvas, border, garbages))
 
@@ -52,9 +51,6 @@ def draw(canvas):
                 coroutine.send(None)
             except StopIteration:
                 coroutines.remove(coroutine)
-
-        if len(coroutines) == 0:
-            break
 
         canvas.refresh()
         time.sleep(TIC_TIMEOUT)

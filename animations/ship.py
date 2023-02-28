@@ -13,12 +13,13 @@ from curses_tools import draw_frame, read_controls
 async def animate_spaceship(canvas, border, row, column, ship):
     """
     Анимация корабля
-    @param canvas: объект игрового поля
-    @param border: объект, содержащий границы игрового поля
-    @param row: начальная вертикальная координата размещения корабля
-    @param column: начальная горизонтальная координата размещения корабля
-    @param ship: объект космического корабля
-    @return:
+
+    Ключевые аргументы:
+    canvas -- объект игрового поля
+    border -- объект, содержащий границы игрового поля
+    row -- начальная вертикальная координата размещения корабля
+    column -- начальная горизонтальная координата размещения корабля
+    ship -- объект космического корабля
     """
 
     row_speed, column_speed = 0, 0
@@ -53,9 +54,6 @@ async def animate_spaceship(canvas, border, row, column, ship):
                 ):
                     ship_destroyed = True
                     break
-
-            if ship_destroyed:
-                break
 
             # Прорисовку выстрела вставляем между кадрами анимации корабля
             if space_pressed:
